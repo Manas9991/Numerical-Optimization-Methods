@@ -8,4 +8,4 @@ Univariate Gradient based method: Newton Raphson method
 
 Multivariate Unconstrained method: Hessian matrix
 
-Multivariate Gradient Descent method: Cauchy's Gradient descent
+Multivariate Gradient Descent method: Cauchy's Gradient descent, Newton's method, Marquardt's method
