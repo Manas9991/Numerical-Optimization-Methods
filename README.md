@@ -11,3 +11,5 @@ Multivariate Unconstrained method: Hessian matrix
 Multivariate Gradient Descent method: Cauchy's Gradient descent, Newton's method, Marquardt's method
 
 Multivariate Constrained method: Lagrange's multipliers method 
+
+Evolution Agorithm : Genetic Algorithm
