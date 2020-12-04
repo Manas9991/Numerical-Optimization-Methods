@@ -4,14 +4,14 @@ N = 5; %Number of ants %k
 I = 7; %Number of nodes %j
 iter = 2; %Number of iterations
 phi = 5; %Scaling parameter
-rho = 0.5; %Evaporation 
-xmin = 0.3;
-xmax = 0.6;
-f = @(x)(2*(sqrt(x) - 3) + sqrt(x)/100);
+rho = 0.5; %Pherome evaporation coefficient
+xmin = 0.3; %lower bound
+xmax = 0.6; %upper bound
+f = @(x)(2*(sqrt(x) - 3) + sqrt(x)/100); %objective function
 
 for iteration = 1:iter
     if (iteration == 1)
-        %Create uniformly distributed variables
+        %Create uniformly distributed variables over the bounded range
         increment = (xmax-xmin)/(I-1);
         x0 = [];
         for i = 1:I
@@ -24,7 +24,7 @@ for iteration = 1:iter
             roulletf0 = [roulletf0 f0(i)/roulletden];
         end
         randomforselection = min(roulletf0) + (max(roulletf0)-min(roulletf0)).*rand(1, I);
-        %select nodes from tournament:
+        %select nodes from Roullete wheel:
         selected = [];
         for i = 1:I
             dist = inf;
@@ -55,7 +55,6 @@ for iteration = 1:iter
     
     else
         randomforselection = min(probab) + (max(probab)-min(probab)).*rand(1, N);
-        %select nodes from tournament:
         selected = [];
         for i = 1:N
             dist = inf;
