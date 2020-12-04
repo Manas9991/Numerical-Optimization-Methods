@@ -1,17 +1,20 @@
 clear 
 clc
-N = 5; %Number of ants %k
-I = 7; %Number of nodes %j
-iter = 2; %Number of iterations
+N = 150; %Number of ants %k
+I = 200; %Number of nodes %j
+iter = 10; %Number of iterations
 phi = 5; %Scaling parameter
-rho = 0.5; %Pherome evaporation coefficient
-xmin = 0.3; %lower bound
-xmax = 0.6; %upper bound
-f = @(x)(2*(sqrt(x) - 3) + sqrt(x)/100); %objective function
+rho = 0.5; %Evaporation 
+xmin = -10; %Lower bound
+xmax = 10; %Upper bound
+f = @(x)((x-5).^2 -1); %Objective function
+
+anspoints = [];
+ansvalues = [];
 
 for iteration = 1:iter
     if (iteration == 1)
-        %Create uniformly distributed variables over the bounded range
+        %Creating equidistant variables in given range
         increment = (xmax-xmin)/(I-1);
         x0 = [];
         for i = 1:I
@@ -24,7 +27,7 @@ for iteration = 1:iter
             roulletf0 = [roulletf0 f0(i)/roulletden];
         end
         randomforselection = min(roulletf0) + (max(roulletf0)-min(roulletf0)).*rand(1, I);
-        %select nodes from Roullete wheel:
+        %select nodes from Roullete Wheel:
         selected = [];
         for i = 1:I
             dist = inf;
@@ -83,11 +86,29 @@ for iteration = 1:iter
             probab = [probab tau(i)/sumtau];
         end
     end
+    
+    flag = 0;
+    for i = 1:N
+        if ((fselected(i) == fbest) && (flag == 0)) 
+            anspoints = [anspoints selected(i)];
+            flag = 1;
+        end
+    end
+    ansvalues = [ansvalues fbest];
+    
 end
 
 %Result%
+flag = 0;
 for i = 1:N
-    if (fselected(i) == fbest)
+    if ((fselected(i) == fbest) && (flag == 0))
         fprintf('The minimum value is %f at x = %f', fbest, selected(i))
+        flag = 1;
     end
 end
+
+X = xmin:0.001:xmax;
+Y = arrayfun(f, X);
+plot(X, Y)
+hold on;
+scatter(anspoints, ansvalues, 'k', 'filled')
