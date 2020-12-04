@@ -12,4 +12,4 @@ Multivariate Gradient Descent method: Cauchy's Gradient descent, Newton's method
 
 Multivariate Constrained method: Lagrange's multipliers method 
 
-Evolutionary Algorithms : Genetic Algorithm, Particle Swarm Optimization
+Nature Inspired Algorithms : Genetic Algorithm, Particle Swarm Optimization, Ant Colony Optimization
